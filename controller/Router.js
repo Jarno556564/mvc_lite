@@ -2,13 +2,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Text } from 'react-native';
 import LandingView from '../view/LandingView';
 
-import NounsOverview from '../view/Nouns/NounsOverview';
-import ListNounsView from '../view/Nouns/ListsNounsView';
-import ReadNounView from '../view/Nouns/ReadNounView';
+import NounsOverview from '../view/nouns/NounsOverview';
+import ListNounsView from '../view/nouns/ListsNounsView';
+import ReadNounView from '../view/nouns/ReadNounView';
 
-import UsersOverview from '../view/Users/UsersOverview';
-import ListUsersView from '../view/Users/ListsUsersView';
-import ReadUserView from '../view/Users/ReadUserView';
+import UsersOverview from '../view/users/UsersOverview';
+import ListUsersView from '../view/users/ListsUsersView';
+import ReadUserView from '../view/users/ReadUserView';
 
 // Snelle opzet view
 const CreateNounView = () => <Text>Create screen</Text>;
