@@ -8,10 +8,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styles from './ListStyle.js'; // Import the styles module
-import { NounsContext } from '../../controller/NounsController.js';
+import { useNounsContext } from '../../controller/NounsController';
 
 const NounsList = () => {
-  const { state, dispatch } = useContext(NounsContext);
+  const { state, dispatch } = useNounsContext();
 
   const Item = (props) => {
     const { id, name, bornAt, photo } = props;

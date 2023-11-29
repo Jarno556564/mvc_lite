@@ -8,10 +8,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styles from './ListStyle.js'; // Import the styles module
-import { UsersContext } from '../../controller/UsersController.js';
+import { useUsersContext } from '../../controller/UsersController';
 
 const UsersList = () => {
-  const { state, dispatch } = useContext(UsersContext);
+  const { state, dispatch } = useUsersContext();
 
   const Item = (props) => {
     const { id, name, bornAt, photo } = props;

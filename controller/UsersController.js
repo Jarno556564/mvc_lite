@@ -63,39 +63,40 @@ export const UsersController = ({ children }) => {
           ...state,
           currentScreen: 'CreateUserView',
           message: 'Create your user',
+          noun: create,
         };
       case 'READUSER':
         // console.log('READUSERtriggerd', action);
 
-        update = collectReadUser(state.id);
+        read = collectReadUser(action.id);
 
         navigation.navigate('ReadUserView');
         return {
           ...state,
           currentScreen: 'ReadUserView',
-          user: 'Read',
+          user: read,
         };
       case 'UPDATEUSER':
         // console.log('UPDATEUSERtriggerd', action);
 
-        update = collectUpdateUser(state.id);
+        update = collectUpdateUser(action.id);
 
         navigation.navigate('UpdateUserView');
         return {
           ...state,
           currentScreen: 'UpdateUserView',
-          user: 'Update',
+          user: update,
         };
       case 'DELETEUSER':
         // console.log('DELETEUSERtriggered', action);
 
-        deleete = collectDeleteUser(state.id);
+        deleete = collectDeleteUser(action.id);
 
         navigation.navigate('DeleteUserView');
         return {
           ...state,
           currentScreen: 'DeleteUserView',
-          user: 'Delete',
+          user: deleete,
         };
       case 'LISTUSERS':
         // console.log('LISTUSERStriggered', action);

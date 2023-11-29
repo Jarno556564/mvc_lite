@@ -4,14 +4,14 @@ const ListsStyle = StyleSheet.create({
   listcontainer: {
     flexDirection: "row",
     shadowColor: 'rgb(0,0,0)',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
     shadowOpacity: 0.26,
     elevation: 4,
     backgroundColor: '#fff',
     padding: 16,
     margin: 8,
-   },
+  },
   listlead: {
     width: 40,
     height: 40,

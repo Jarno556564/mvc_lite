@@ -63,39 +63,40 @@ export const NounsController = ({ children }) => {
           ...state,
           currentScreen: 'CreateNounView',
           message: 'Create your noun',
+          noun: create,
         };
       case 'READNOUN':
         // console.log('READNOUNtriggerd', action);
 
-        update = collectReadNoun(state.id);
+        read = collectReadNoun(action.id);
 
         navigation.navigate('ReadNounView');
         return {
           ...state,
           currentScreen: 'ReadNounView',
-          noun: 'Read',
+          noun: read,
         };
       case 'UPDATENOUN':
         // console.log('UPDATENOUNtriggerd', action);
 
-        update = collectUpdateNoun(state.id);
+        update = collectUpdateNoun(action.id);
 
         navigation.navigate('UpdateNounView');
         return {
           ...state,
           currentScreen: 'UpdateNounView',
-          noun: 'Update',
+          noun: update,
         };
       case 'DELETENOUN':
         // console.log('DELETENOUNtriggered', action);
 
-        deleete = collectDeleteNoun(state.id);
+        deleete = collectDeleteNoun(action.id);
 
         navigation.navigate('DeleteNounView');
         return {
           ...state,
           currentScreen: 'DeleteNounView',
-          noun: 'Delete',
+          noun: deleete,
         };
       case 'LISTNOUNS':
         // console.log('LISTNOUNStriggered', action);
