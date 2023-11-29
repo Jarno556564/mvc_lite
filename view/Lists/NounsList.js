@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styles from './ListStyle.js'; // Import the styles module
-import { NounsContext } from '../../controller/NounsController';
+import { NounsContext } from '../../controller/NounsController.js';
 
-const Lists = () => {
+const NounsList = () => {
   const { state, dispatch } = useContext(NounsContext);
 
   const Item = (props) => {
@@ -26,7 +26,8 @@ const Lists = () => {
         </View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => dispatch({ type: 'READNOUN', id: id })}>
+          onPress={() => dispatch({ type: 'READNOUN', id: id })}
+        >
           <Image style={styles.listtrail} source={{ uri: photo }} />
         </TouchableOpacity>
       </View>
@@ -49,4 +50,4 @@ const Lists = () => {
   );
 };
 
-export default Lists;
+export default NounsList;

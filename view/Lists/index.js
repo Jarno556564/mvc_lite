@@ -1,1 +1,2 @@
-export {default} from "./Lists";
+export { default as NounsList } from "./NounsList";
+export { default as UsersList } from "./UsersList";
