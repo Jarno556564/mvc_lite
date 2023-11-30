@@ -4,6 +4,7 @@ import LandingView from '../view/LandingView';
 
 import NounsOverview from '../view/nouns/NounsOverview';
 import ListNounsView from '../view/nouns/ListsNounsView';
+import CreateNounView from '../view/nouns/CreateNounView';
 import ReadNounView from '../view/nouns/ReadNounView';
 
 import UsersOverview from '../view/users/UsersOverview';
@@ -11,7 +12,7 @@ import ListUsersView from '../view/users/ListsUsersView';
 import ReadUserView from '../view/users/ReadUserView';
 
 // Snelle opzet view
-const CreateNounView = () => <Text>Create screen</Text>;
+// const CreateNounView = () => <Text>Create screen</Text>;
 // const ReadNounView = () => <Text>Read screen</Text>;
 const UpdateNounView = () => <Text>Update screen</Text>;
 const DeleteNounView = () => <Text>Delete screen</Text>;
