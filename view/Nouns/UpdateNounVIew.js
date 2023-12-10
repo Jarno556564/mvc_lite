@@ -1,15 +1,22 @@
-// CreateNounView.js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Image, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import styles from '../assets/UpfrontStyles';
 import { useNounsContext } from '../../controller/NounsController';
 
-const CreateNounView = () => {
-    const [image, setImage] = useState('');
+const UpdateNounView = () => {
     const [name, setName] = useState('');
     const [bornAt, setBornAt] = useState('');
+    const [photo, setPhoto] = useState('');
     const { nounsState, dispatch } = useNounsContext();
+
+    useEffect(() => {
+        if (nounsState.data) {
+            setName(nounsState.data.name || null);
+            setBornAt(nounsState.data.bornAt || null);
+            setPhoto(nounsState.data.photo || null)
+        }
+    }, [nounsState.data]);
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -18,39 +25,41 @@ const CreateNounView = () => {
         });
 
         if (!result.canceled) {
-            setImage(result.assets[0].uri);
+            setPhoto(result.assets[0].uri);
+            // re render the Image component to show the new image
         }
     };
 
-    const saveNoun = () => {
+    const updateNoun = () => {
         const newNoun = {
-            id: nounsState.nouns.length + 1,
+            id: nounsState.data.id,
             name,
             bornAt,
-            photo: image,
+            photo,
         };
-
-        dispatch({ type: 'CREATENEWNOUN', payload: newNoun })
+        dispatch({ type: 'SETUPDATENOUN', payload: newNoun })
     }
 
     return (
         <View>
             <TextInput
                 placeholder="name"
-                onChangeText={name => setName(name)} />
+                onChangeText={name => setName(name)}
+                defaultValue={nounsState.data.name} />
             <TextInput
                 placeholder="Born At"
-                onChangeText={bornAt => setBornAt(bornAt)} />
+                onChangeText={bornAt => setBornAt(bornAt)}
+                defaultValue={nounsState.data.bornAt} />
             <Button title="Pick an image from camera roll" onPress={pickImage} />
-            {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+            {photo && <Image source={{ uri: photo }} style={{ width: 200, height: 200 }} />}
             <TouchableOpacity
                 style={styles.button}
-                onPress={saveNoun}
+                onPress={updateNoun}
             >
-                <Text style={styles.buttonText}>Create</Text>
+                <Text style={styles.buttonText}>Update</Text>
             </TouchableOpacity>
         </View >
     );
 };
 
-export default CreateNounView;
+export default UpdateNounView;

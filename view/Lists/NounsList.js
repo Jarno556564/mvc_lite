@@ -1,3 +1,4 @@
+// NounsList.js
 import { useContext } from 'react';
 import {
   View,
@@ -11,7 +12,7 @@ import styles from './ListStyle.js'; // Import the styles module
 import { useNounsContext } from '../../controller/NounsController';
 
 const NounsList = () => {
-  const { state, dispatch } = useNounsContext();
+  const { nounsState, dispatch } = useNounsContext();
 
   const Item = (props) => {
     const { id, name, bornAt, photo } = props;
@@ -30,13 +31,20 @@ const NounsList = () => {
         >
           <Image style={styles.listtrail} source={{ uri: photo }} />
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => dispatch({ type: 'NAVIGATEUPDATENOUN', id: id })}
+        >
+          <Text> Update </Text>
+        </TouchableOpacity>
       </View>
     );
   };
 
   return (
     <FlatList
-      data={state.data}
+      data={nounsState.nouns}
       renderItem={({ item }) => (
         <Item
           id={item.id}

@@ -6,8 +6,8 @@ const ListNounsView = () => {
   const { state } = useNounsContext();
   return (
     <View>
-      <Text>Read noun page</Text>
-      <Text>{state.message}</Text>
+      {/* <Text>List nouns page</Text>
+      <Text>{state.message}</Text> */}
       <NounsList action="READNOUN" />
     </View>
   );

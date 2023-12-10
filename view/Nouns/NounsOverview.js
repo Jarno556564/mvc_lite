@@ -34,10 +34,10 @@ const NounsOverview = () => {
     <SafeAreaView>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => handleNavigatie('CREATENOUN', 'new')}>
+        onPress={() => handleNavigatie('NAVIGATECREATENOUN', 'new')}>
         <Text style={styles.buttonText}>Create</Text>
       </TouchableOpacity>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => handleNavigatie('READNOUN', 5)}>
         <Text style={styles.buttonText}>Read</Text>
@@ -51,7 +51,7 @@ const NounsOverview = () => {
         style={styles.button}
         onPress={() => handleNavigatie('DELETENOUN', 5)}>
         <Text style={styles.buttonText}>Delete</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TouchableOpacity
         style={styles.button}
         onPress={() => handleNavigatie('LISTNOUNS')}>

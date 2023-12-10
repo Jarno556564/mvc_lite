@@ -1,78 +1,38 @@
 // NounsLogic.js
-import React, { useState } from 'react';
+const NounsLogic = (nounsState) => {
+  const createNoun = (name, bornAt, photo) => {
+    const newItem = {
+      id: nounsState.nouns.length + 1,
+      name,
+      bornAt,
+      photo,
+    };
 
-export default NounsLogic = () => {
-  const [data, setData] = useState([
-
-    {
-      "id": 1,
-      "name": "Robert Downey Jr.",
-      "bornAt": "New York City, NY",
-      "photo": "https://jsonformatter.org/img/Robert-Downey-Jr.jpg"
-    },
-    {
-      "id": 2,
-      "name": "Tom Cruise",
-      "bornAt": "Syracuse, NY",
-      "photo": "https://jsonformatter.org/img/tom-cruise.jpg"
-    },
-
-    {
-      "id": 4,
-      "name": "Morris Kushwaha",
-      "bornAt": "New Delhi City, IN",
-      "photo": "https://androidwave.com/wp-content/uploads/2021/02/android-wave.jpeg"
-    }, {
-      "id": 5,
-      "name": "Scarlett Johansson.",
-      "bornAt": "New York City, NY",
-      "photo": "https://androidwave.com/wp-content/uploads/2021/01/profile_pic-300x300.jpg"
-    },
-    {
-      "id": 7,
-      "name": "Will Smith",
-      "bornAt": "New York City, NY",
-      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQqg3yvv1Kv3KA2XtPu4T1p4z3j6Ubk-XRzoT5FUJIdkh4RWX6JfMM7Jc&s=0"
-    },
-    {
-      "id": 8,
-      "name": "Leonardo DiCaprio",
-      "bornAt": "New York City, NY",
-      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYZRJI2Hr7MTGsc33GZVm_f0ZLyZiCvHhQk8ojXZxt84pmdzZnHnt5kdld&s=0"
-    },
-    {
-      "id": 6,
-      "name": "Robert Downey Jr.",
-      "bornAt": "New York City, NY",
-      "photo": "https://jsonformatter.org/img/Robert-Downey-Jr.jpg"
-    },
-    {
-      "id": 3,
-      "name": "Tom Cruise",
-      "bornAt": "Syracuse, NY",
-      "photo": "https://jsonformatter.org/img/tom-cruise.jpg"
-    },]);
-
-  createNoun = () => {
-    return ['create', 'Noun'];
+    return newItem;
   };
 
-  readNoun = (id) => {
-    const foundObject = data.find(obj => obj.id === id);
-    // console.log(foundObject);
-    return foundObject;
+  const readNoun = (data, id) => {
+    const foundNoun = data.find(noun => noun.id === id);
+
+    return foundNoun;
   };
 
-  updateNoun = (id) => {
-    return ['update', 'Noun id = ', id];
+  const updateNoun = (state, data) => {
+    const updatedNouns = state.nouns.map(noun => {
+      if (noun.id === data.id) {
+        return { ...noun, ...data };
+      }
+      return noun;
+    });
+
+    return updatedNouns;
   };
 
-  deleteNoun = (id) => {
+  const deleteNoun = (id) => {
     return ['delete', 'Noun id = ', id];
   };
 
-  listNouns = () => {
-    // console.log('model', data);
+  const listNouns = (data) => {
     return data;
   };
 
@@ -84,3 +44,5 @@ export default NounsLogic = () => {
     listNouns,
   };
 };
+
+export default NounsLogic;

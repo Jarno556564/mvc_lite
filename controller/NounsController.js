@@ -4,88 +4,108 @@ import React, { createContext, useReducer, useContext } from 'react';
 // De klasse NounsLogic importeren uit het model
 import { useNavigation } from '@react-navigation/native';
 import NounsLogic from '../model/NounsLogic';
+import InitialNouns from '../model/InitialNouns';
 
-// Een context maken voor het beheren van de status
+// Een context emmer maken voor het beheren van de status
 export const NounsContext = createContext();
 
 // Functionele component van de NounsController
 export const NounsController = ({ children }) => {
-  const initialState = {
-    noun: '',
-    id: '',
-    nouns: [],
-    result: '',
-    data: null,
-    message: 'yohoo',
-  };
-
   const navigation = useNavigation();
 
-  const NounsLogicInstance = NounsLogic();
+  // const { createNoun, readNoun, updateNoun, deleteNoun, listNouns } = NounsLogic(nounsState);
+  const nounsLogicInstance = NounsLogic();
 
   // Functies voor interactie met NounsLogic methoden
   const collectCreateNoun = () => {
-    const result = NounsLogicInstance.createNoun();
+    const result = nounsLogicInstance.createNoun();
     // console.log('collectCreateNoun', result);
     return result;
   };
-  const collectReadNoun = (id) => {
-    const result = NounsLogicInstance.readNoun(id);
-    // console.log('collectReadNoun', result);
+  const collectReadNoun = (data, id) => {
+    const result = nounsLogicInstance.readNoun(data, id);
+
     return result;
   };
-  const collectUpdateNoun = (id) => {
-    const result = NounsLogicInstance.updateNoun(id);
+  const collectUpdateNoun = (state, nounToUpdate, data) => {
+    const result = nounsLogicInstance.updateNoun(state, nounToUpdate, data);
     // console.log('collectUpdateNoun', result);
     return result;
   };
   const collectDeleteNoun = (id) => {
-    const result = NounsLogicInstance.deleteNoun(id);
+    const result = nounsLogicInstance.deleteNoun(id);
     // console.log('collectDeleteNoun', result);
     return result;
   };
-  const collectListNounsView = () => {
-    const result = NounsLogicInstance.listNouns();
-    // console.log('collectListNounsView', result);
+  const collectListNounsView = (data) => {
+    const result = nounsLogicInstance.listNouns(data);
+
     return result;
   };
 
-  // Reducer-functie voor het afhandelen van State-veranderingen op basis van verzonden acties
-  const handleRequest = (state, action) => {
+  // functie voor het afhandelen van State-veranderingen op basis van verzonden acties
+  const handleRequest = (nounsState, action) => {
     switch (action.type) {
-      case 'CREATENOUN':
+      case 'NAVIGATECREATENOUN':
         // console.log('CREATENOUNtriggered', action);
-
-        create = collectCreateNoun();
 
         navigation.navigate('CreateNounView');
         return {
-          ...state,
+          ...nounsState,
           currentScreen: 'CreateNounView',
+          message: 'Create noun view',
+        };
+      case 'CREATENEWNOUN':
+        // console.log('CREATENEWNOUNtriggered', action);
+
+        const newNoun = action.payload;
+
+        navigation.navigate('ListNounsView');
+        return {
+          ...nounsState,
+          nouns: [...nounsState.nouns, newNoun],
+          currentScreen: 'CreateNewNounView',
           message: 'Create your noun',
-          noun: create,
         };
       case 'READNOUN':
         // console.log('READNOUNtriggerd', action);
 
-        read = collectReadNoun(action.id);
+        // console.log(nounsState.nouns);
+        read = collectReadNoun(nounsState.nouns, action.id);
 
         navigation.navigate('ReadNounView');
         return {
-          ...state,
+          ...nounsState,
           currentScreen: 'ReadNounView',
           noun: read,
         };
-      case 'UPDATENOUN':
+      case 'NAVIGATEUPDATENOUN':
         // console.log('UPDATENOUNtriggerd', action);
 
-        update = collectUpdateNoun(action.id);
+        data = collectReadNoun(nounsState.nouns, action.id);
+        // console.log(data);
 
         navigation.navigate('UpdateNounView');
         return {
-          ...state,
+          ...nounsState,
           currentScreen: 'UpdateNounView',
-          noun: update,
+          data: data,
+        };
+      case 'SETUPDATENOUN':
+
+        // console.log('payload', action.payload);
+        // console.log('noun to update', nounToUpdate);
+
+        // change the value of the noun with payload data.
+        result = collectUpdateNoun(nounsState, action.payload);
+
+        // console.log('input data to method', result);
+
+        navigation.navigate('ListNounsView');
+        return {
+          ...nounsState,
+          currentScreen: 'UpdateNounView',
+          nouns: result,
         };
       case 'DELETENOUN':
         // console.log('DELETENOUNtriggered', action);
@@ -94,20 +114,20 @@ export const NounsController = ({ children }) => {
 
         navigation.navigate('DeleteNounView');
         return {
-          ...state,
+          ...nounsState,
           currentScreen: 'DeleteNounView',
           noun: deleete,
         };
       case 'LISTNOUNS':
         // console.log('LISTNOUNStriggered', action);
 
-        list = collectListNounsView();
+        list = collectListNounsView(nounsState.nouns);
 
         navigation.navigate('ListNounsView');
         return {
-          ...state,
+          ...nounsState,
           currentScreen: 'ListNounsView',
-          data: list,
+          nouns: list,
         };
       default:
         throw new Error('Unknown action');
@@ -115,11 +135,11 @@ export const NounsController = ({ children }) => {
   };
 
   // State en dispatch initialiseren met useReducer
-  const [state, dispatch] = useReducer(handleRequest, initialState);
+  const [nounsState, dispatch] = useReducer(handleRequest, InitialNouns);
 
   // State en dispatch aanbieden via de context aan zijn kinderen
   return (
-    <NounsContext.Provider value={{ state, dispatch }}>
+    <NounsContext.Provider value={{ nounsState, dispatch }}>
       {children}
     </NounsContext.Provider>
   );

@@ -3,7 +3,7 @@ import { useUsersContext } from '../../controller/UsersController';
 
 const ReadUserView = () => {
     const { state } = useUsersContext();
-    console.log("user", state.user);
+    // console.log("user", state.user);
     return (
         <View>
             <Text>Read Screen</Text>
