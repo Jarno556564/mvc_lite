@@ -34,10 +34,10 @@ const UsersOverview = () => {
         <SafeAreaView>
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => handleNavigatie('CREATEUSER', 'new')}>
+                onPress={() => handleNavigatie('NAVIGATECREATEUSER', 'new')}>
                 <Text style={styles.buttonText}>Create</Text>
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
                 style={styles.button}
                 onPress={() => handleNavigatie('READUSER', 5)}>
                 <Text style={styles.buttonText}>Read</Text>
@@ -51,7 +51,7 @@ const UsersOverview = () => {
                 style={styles.button}
                 onPress={() => handleNavigatie('DELETEUSER', 5)}>
                 <Text style={styles.buttonText}>Delete</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => handleNavigatie('LISTUSERS')}>

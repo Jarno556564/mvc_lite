@@ -1,3 +1,4 @@
+// UsersList.js
 import { useContext } from 'react';
 import {
   View,
@@ -11,7 +12,7 @@ import styles from './ListStyle.js'; // Import the styles module
 import { useUsersContext } from '../../controller/UsersController';
 
 const UsersList = () => {
-  const { state, dispatch } = useUsersContext();
+  const { usersState, dispatch } = useUsersContext();
 
   const Item = (props) => {
     const { id, name, bornAt, photo } = props;
@@ -30,13 +31,20 @@ const UsersList = () => {
         >
           <Image style={styles.listtrail} source={{ uri: photo }} />
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => dispatch({ type: 'NAVIGATEUPDATEUSER', id: id })}
+        >
+          <Text> Update </Text>
+        </TouchableOpacity>
       </View>
     );
   };
 
   return (
     <FlatList
-      data={state.data}
+      data={usersState.users}
       renderItem={({ item }) => (
         <Item
           id={item.id}

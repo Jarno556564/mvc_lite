@@ -3,11 +3,11 @@ import { useUsersContext } from '../../controller/UsersController';
 import { UsersList } from '../Lists';
 
 const ListUsersView = () => {
-  const { state } = useUsersContext();
+  const { usersState } = useUsersContext();
   return (
     <View>
-      <Text>Read user page</Text>
-      <Text>{state.message}</Text>
+      {/* <Text>Read user page</Text>
+      <Text>{usersState.message}</Text> */}
       <UsersList action="READUSER" />
     </View>
   );

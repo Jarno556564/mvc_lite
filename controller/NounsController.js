@@ -13,32 +13,32 @@ export const NounsContext = createContext();
 export const NounsController = ({ children }) => {
   const navigation = useNavigation();
 
-  // const { createNoun, readNoun, updateNoun, deleteNoun, listNouns } = NounsLogic(nounsState);
-  const nounsLogicInstance = NounsLogic();
+  const { createNoun, readNoun, updateNoun, deleteNoun, listNouns } = NounsLogic();
+  // const nounsLogicInstance = NounsLogic();
 
   // Functies voor interactie met NounsLogic methoden
   const collectCreateNoun = () => {
-    const result = nounsLogicInstance.createNoun();
+    const result = createNoun();
     // console.log('collectCreateNoun', result);
     return result;
   };
   const collectReadNoun = (data, id) => {
-    const result = nounsLogicInstance.readNoun(data, id);
+    const result = readNoun(data, id);
 
     return result;
   };
   const collectUpdateNoun = (state, nounToUpdate, data) => {
-    const result = nounsLogicInstance.updateNoun(state, nounToUpdate, data);
+    const result = updateNoun(state, nounToUpdate, data);
     // console.log('collectUpdateNoun', result);
     return result;
   };
   const collectDeleteNoun = (id) => {
-    const result = nounsLogicInstance.deleteNoun(id);
+    const result = deleteNoun(id);
     // console.log('collectDeleteNoun', result);
     return result;
   };
-  const collectListNounsView = (data) => {
-    const result = nounsLogicInstance.listNouns(data);
+  const collectListNouns = (data) => {
+    const result = listNouns(data);
 
     return result;
   };
@@ -47,7 +47,6 @@ export const NounsController = ({ children }) => {
   const handleRequest = (nounsState, action) => {
     switch (action.type) {
       case 'NAVIGATECREATENOUN':
-        // console.log('CREATENOUNtriggered', action);
 
         navigation.navigate('CreateNounView');
         return {
@@ -121,7 +120,7 @@ export const NounsController = ({ children }) => {
       case 'LISTNOUNS':
         // console.log('LISTNOUNStriggered', action);
 
-        list = collectListNounsView(nounsState.nouns);
+        list = collectListNouns(nounsState.nouns);
 
         navigation.navigate('ListNounsView');
         return {

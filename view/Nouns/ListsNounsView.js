@@ -3,11 +3,11 @@ import { useNounsContext } from '../../controller/NounsController';
 import { NounsList } from '../Lists';
 
 const ListNounsView = () => {
-  const { state } = useNounsContext();
+  const { nounsState } = useNounsContext();
   return (
     <View>
       {/* <Text>List nouns page</Text>
-      <Text>{state.message}</Text> */}
+      <Text>{nounsState.message}</Text> */}
       <NounsList action="READNOUN" />
     </View>
   );

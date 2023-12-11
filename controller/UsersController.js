@@ -4,88 +4,106 @@ import React, { createContext, useReducer, useContext } from 'react';
 // De klasse UsersLogic importeren uit het model
 import { useNavigation } from '@react-navigation/native';
 import UsersLogic from '../model/UsersLogic';
+import InitialUsers from '../model/InitialUsers';
 
-// Een context maken voor het beheren van de status
+// Een context emmer maken voor het beheren van de status
 export const UsersContext = createContext();
 
 // Functionele component van de UsersController
 export const UsersController = ({ children }) => {
-  const initialState = {
-    user: '',
-    id: '',
-    users: [],
-    result: '',
-    data: null,
-    message: 'yohoo',
-  };
-
   const navigation = useNavigation();
 
-  const UsersLogicInstance = UsersLogic();
+  // const usersLogicInstance = UsersLogic();
+  const { createUser, readUser, updateUser, deleteUser, listUsers } = UsersLogic();
 
   // Functies voor interactie met UsersLogic methoden
   const collectCreateUser = () => {
-    const result = UsersLogicInstance.createUser();
+    const result = createUser();
     // console.log('collectCreateUser', result);
     return result;
   };
-  const collectReadUser = (id) => {
-    const result = UsersLogicInstance.readUser(id);
-    // console.log('collectReadUser', result);
+  const collectReadUser = (data, id) => {
+    const result = readUser(data, id);
+
     return result;
   };
-  const collectUpdateUser = (id) => {
-    const result = UsersLogicInstance.updateUser(id);
+  const collectUpdateUser = (state, userToUpdate, data) => {
+    const result = updateUser(state, userToUpdate, data);
     // console.log('collectUpdateUser', result);
     return result;
   };
   const collectDeleteUser = (id) => {
-    const result = UsersLogicInstance.deleteUser(id);
+    const result = deleteUser(id);
     // console.log('collectDeleteUser', result);
     return result;
   };
-  const collectListUsersView = () => {
-    const result = UsersLogicInstance.listUsers();
-    // console.log('collectListUsersView', result);
+  const collectListUsers = (data) => {
+    const result = listUsers(data);
+
     return result;
   };
 
-  // Reducer-functie voor het afhandelen van State-veranderingen op basis van verzonden acties
-  const handleRequest = (state, action) => {
+  // functie voor het afhandelen van State-veranderingen op basis van verzonden acties
+  const handleRequest = (usersState, action) => {
     switch (action.type) {
-      case 'CREATEUSER':
-        // console.log('CREATEUSERtriggered', action);
-
-        create = collectCreateUser();
+      case 'NAVIGATECREATEUSER':
 
         navigation.navigate('CreateUserView');
         return {
-          ...state,
+          ...usersState,
           currentScreen: 'CreateUserView',
+          message: 'Create user view',
+        };
+      case 'CREATENEWUSER':
+        // console.log('CREATENEWUSERtriggered', action);
+
+        const newUser = action.payload;
+
+        navigation.navigate('ListUsersView');
+        return {
+          ...usersState,
+          users: [...usersState.users, newUser],
+          currentScreen: 'CreateNewUserView',
           message: 'Create your user',
-          noun: create,
         };
       case 'READUSER':
         // console.log('READUSERtriggerd', action);
 
-        read = collectReadUser(action.id);
+        // console.log(usersState.users);
+        read = collectReadUser(usersState.users, action.id);
 
         navigation.navigate('ReadUserView');
         return {
-          ...state,
+          ...usersState,
           currentScreen: 'ReadUserView',
           user: read,
         };
-      case 'UPDATEUSER':
+      case 'NAVIGATEUPDATEUSER':
         // console.log('UPDATEUSERtriggerd', action);
 
-        update = collectUpdateUser(action.id);
+        data = collectReadUser(usersState.users, action.id);
+        // console.log(data);
 
         navigation.navigate('UpdateUserView');
         return {
-          ...state,
+          ...usersState,
           currentScreen: 'UpdateUserView',
-          user: update,
+          data: data,
+        };
+      case 'SETUPDATEUSER':
+        // console.log('payload', action.payload);
+        // console.log('user to update', userToUpdate);
+
+        // change the value of the user with payload data.
+        result = collectUpdateUser(usersState, action.payload);
+
+        // console.log('input data to method', result);
+
+        navigation.navigate('ListUsersView');
+        return {
+          ...usersState,
+          currentScreen: 'UpdateUserView',
+          users: result,
         };
       case 'DELETEUSER':
         // console.log('DELETEUSERtriggered', action);
@@ -94,20 +112,20 @@ export const UsersController = ({ children }) => {
 
         navigation.navigate('DeleteUserView');
         return {
-          ...state,
+          ...usersState,
           currentScreen: 'DeleteUserView',
           user: deleete,
         };
       case 'LISTUSERS':
         // console.log('LISTUSERStriggered', action);
 
-        list = collectListUsersView();
+        list = collectListUsers(usersState.users);
 
         navigation.navigate('ListUsersView');
         return {
-          ...state,
+          ...usersState,
           currentScreen: 'ListUsersView',
-          data: list,
+          users: list,
         };
       default:
         throw new Error('Unknown action');
@@ -115,11 +133,11 @@ export const UsersController = ({ children }) => {
   };
 
   // State en dispatch initialiseren met useReducer
-  const [state, dispatch] = useReducer(handleRequest, initialState);
+  const [usersState, dispatch] = useReducer(handleRequest, InitialUsers);
 
   // State en dispatch aanbieden via de context aan zijn kinderen
   return (
-    <UsersContext.Provider value={{ state, dispatch }}>
+    <UsersContext.Provider value={{ usersState, dispatch }}>
       {children}
     </UsersContext.Provider>
   );

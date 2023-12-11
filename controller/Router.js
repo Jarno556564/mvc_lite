@@ -8,6 +8,7 @@ import CreateNounView from '../view/Nouns/CreateNounView';
 import ReadNounView from '../view/Nouns/ReadNounView';
 import UpdateNounView from '../view/Nouns/UpdateNounVIew';
 
+import CreateUserView from '../view/Users/CreateUsersView';
 import UsersOverview from '../view/Users/UsersOverview';
 import ListUsersView from '../view/Users/ListsUsersView';
 import ReadUserView from '../view/Users/ReadUserView';
@@ -18,7 +19,7 @@ import ReadUserView from '../view/Users/ReadUserView';
 // const UpdateNounView = () => <Text>Update screen</Text>;
 const DeleteNounView = () => <Text>Delete screen</Text>;
 
-const CreateUserView = () => <Text>Create screen</Text>;
+// const CreateUserView = () => <Text>Create screen</Text>;
 // const ReadUserView = () => <Text>Read screen</Text>;
 const UpdateUserView = () => <Text>Update screen</Text>;
 const DeleteUserView = () => <Text>Delete screen</Text>;
