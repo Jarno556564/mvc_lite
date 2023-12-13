@@ -77,17 +77,9 @@ const UpfrontStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'gray',
   },
-  //   container: {
-  //   flexDirection: "row",
-  //   shadowColor: 'black',
-  //   shadowOffset: {width: 0, height: 2},
-  //   shadowRadius: 4,
-  //   shadowOpacity: 0.26,
-  //   elevation: 4,
-  //   backgroundColor: '#fff',
-  //   padding: 16,
-  //   marginBottom: 16,
-  // },
+  flexContainer: {
+    flex: 1,
+  },
   photo: {
     width: 80,
     height: 80,
@@ -106,6 +98,9 @@ const UpfrontStyles = StyleSheet.create({
   },
   bornAtText: {
     fontSize: 18,
+  },
+  image: {
+    flex: 1,
   },
 });
 

@@ -32,12 +32,12 @@ const NounsList = () => {
           <Image style={styles.listtrail} source={{ uri: photo }} />
         </TouchableOpacity>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.button}
           onPress={() => dispatch({ type: 'NAVIGATEUPDATENOUN', id: id })}
         >
           <Text> Update </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   };

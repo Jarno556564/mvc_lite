@@ -27,8 +27,8 @@ export const NounsController = ({ children }) => {
 
     return result;
   };
-  const collectUpdateNoun = (state, nounToUpdate, data) => {
-    const result = updateNoun(state, nounToUpdate, data);
+  const collectUpdateNoun = (state, data) => {
+    const result = updateNoun(state, data);
     // console.log('collectUpdateNoun', result);
     return result;
   };
@@ -63,7 +63,7 @@ export const NounsController = ({ children }) => {
         return {
           ...nounsState,
           nouns: [...nounsState.nouns, newNoun],
-          currentScreen: 'CreateNewNounView',
+          currentScreen: 'ListNounsView',
           message: 'Create your noun',
         };
       case 'READNOUN':
@@ -103,7 +103,7 @@ export const NounsController = ({ children }) => {
         navigation.navigate('ListNounsView');
         return {
           ...nounsState,
-          currentScreen: 'UpdateNounView',
+          currentScreen: 'ListNounsView',
           nouns: result,
         };
       case 'DELETENOUN':
