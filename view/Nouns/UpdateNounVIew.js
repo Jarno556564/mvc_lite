@@ -55,7 +55,7 @@ const UpdateNounView = () => {
     }
 
     return (
-        <View>
+        <View style={styles.viewTop}>
             <TextInput
                 placeholder="name"
                 onChangeText={name => setName(name)}

@@ -12,13 +12,6 @@ let winSize = Dimensions.get('window'),
   lite = 'rgb(255, 255, 255)';
 
 const UpfrontStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: secondary,
-    flexDirection: 'column',
-    padding: 8,
-  },
   p: {
     fontSize: 16 / winSize.scale,
     fontWeight: 'normal',
@@ -47,6 +40,39 @@ const UpfrontStyles = StyleSheet.create({
     fontSize: 11 / winSize.scale,
     fontWeight: 'bold',
   },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: secondary,
+    flexDirection: 'column',
+    padding: 8,
+  },
+  dflex: {
+    display: 'flex',
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  between: {
+    justifyContent: 'space-between',
+  },
+  center: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cell: {
+    flex: 1,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: 'gray',
+  },
+  flexOne: {
+    flex: 1,
+  },
+  viewTop: {
+    marginTop: 80,
+  },
   button: {
     // flexDirection: 'row',
     backgroundColor: '#007BFF',
@@ -57,28 +83,26 @@ const UpfrontStyles = StyleSheet.create({
     borderRadius: 5,
     width: 96,
   },
-  icon: {
-    marginRight: 5,
-  },
   buttonText: {
     color: lite,
     fontWeight: 'bold',
   },
+  roundButton: {
+    backgroundColor: '#007BFF',
+    padding: 10,
+    marginHorizontal: 2,
+    marginVertical: 2,
+    alignItems: 'center',
+    borderRadius: 100,
+    width: 40,
+    height: 40,
+  },
+  icon: {
+    // marginRight: 5,
+  },
   table: {
     borderWidth: 1,
     borderColor: 'gray',
-  },
-  row: {
-    flexDirection: 'row',
-  },
-  cell: {
-    flex: 1,
-    padding: 8,
-    borderWidth: 1,
-    borderColor: 'gray',
-  },
-  flexContainer: {
-    flex: 1,
   },
   photo: {
     width: 80,
@@ -87,6 +111,10 @@ const UpfrontStyles = StyleSheet.create({
     overflow: 'hidden',
     borderWidth: 2,
     borderColor: 'red',
+  },
+  image: {
+    height: winSize.height / 2,
+    zIndex: -1,
   },
   profileContainer: {
     flexDirection: 'column',
@@ -99,8 +127,8 @@ const UpfrontStyles = StyleSheet.create({
   bornAtText: {
     fontSize: 18,
   },
-  image: {
-    flex: 1,
+  whitebg: {
+    backgroundColor: 'white',
   },
 });
 

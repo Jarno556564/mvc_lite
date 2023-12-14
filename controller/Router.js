@@ -28,7 +28,7 @@ const Stack = createNativeStackNavigator();
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="LandingView">
+    <Stack.Navigator initialRouteName="LandingView" screenOptions={{ headerTransparent: true, headerTitleStyle: 'grey', headerTintColor: 'grey' }}>
       <Stack.Screen name="LandingView" component={LandingView} />
 
       <Stack.Screen name="NounsOverview" component={NounsOverview} />

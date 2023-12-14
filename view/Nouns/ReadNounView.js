@@ -2,43 +2,37 @@ import { View, Text, ImageBackground, TouchableOpacity, Image } from 'react-nati
 import { useNounsContext } from '../../controller/NounsController';
 import styles from '../assets/UpfrontStyles';
 import IconButton from '../components/IconButton';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const ReadNounView = () => {
     const { nounsState, dispatch } = useNounsContext();
     const image = { uri: nounsState.noun.photo };
     // console.log("noun", nounsState);
     return (
-        <View style={styles.flexContainer}>
+        <View style={[styles.flexOne, styles.whitebg]}>
 
-            {nounsState.noun.photo && <ImageBackground source={image} resizeMode="cover" style={styles.image}></ImageBackground>}
-            {/* {nounsState.noun.photo && <Image source={{uri: nounsState.noun.photo}} style={{ width: 200, height: 200 }}></Image>} */}
+            <LinearGradient
+                colors={['transparent', 'white']}
+                style={{ height: '70%', width: '100%' }} >
+                {nounsState.noun.photo && <ImageBackground source={image} resizeMode="cover" style={[styles.image]}></ImageBackground>}
+            </LinearGradient>
 
-            <View>
-                <Text style={styles.nameText}>{nounsState.noun.name}</Text>
-                <Text style={styles.bornAtText}>{nounsState.noun.bornAt}</Text>
-            </View>
+            <View style={[styles.dflex, styles.row, styles.between]}>
+                <View>
+                    <Text style={styles.nameText}>{nounsState.noun.name}</Text>
+                    <Text style={styles.bornAtText}>{nounsState.noun.bornAt}</Text>
+                </View>
 
-            <View style={styles.row}>
-                {/* <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => dispatch({ type: 'NAVIGATEUPDATENOUN', id: nounsState.noun.id })}
-                >
-                    <Text style={styles.buttonText}> Update </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => dispatch({ type: 'DELETENOUN', id: nounsState.noun.id })}
-                >
-                    <Text style={styles.buttonText}>Delete</Text>
-                </TouchableOpacity> */}
-                <IconButton
-                    iconName={'pencil'}
-                    onPress={() => dispatch({ type: 'NAVIGATEUPDATENOUN', id: nounsState.noun.id })}
-                />
-                <IconButton
-                    iconName={'trash'}
-                    onPress={() => dispatch({ type: 'DELETENOUN', id: nounsState.noun.id })}
-                />
+                <View style={styles.row}>
+                    <IconButton
+                        iconName={'pencil'}
+                        onPress={() => dispatch({ type: 'NAVIGATEUPDATENOUN', id: nounsState.noun.id })}
+                    />
+                    <IconButton
+                        iconName={'trash'}
+                        onPress={() => dispatch({ type: 'DELETENOUN', id: nounsState.noun.id })}
+                    />
+                </View>
             </View>
         </View >
     );

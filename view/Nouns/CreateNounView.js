@@ -1,5 +1,5 @@
 // CreateNounView.js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Image, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import styles from '../assets/UpfrontStyles';
@@ -48,7 +48,7 @@ const CreateNounView = () => {
     }
 
     return (
-        <View>
+        <View style={styles.viewTop}>
             <TextInput
                 placeholder="name"
                 onChangeText={name => setName(name)} />
