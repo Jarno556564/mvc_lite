@@ -44,7 +44,7 @@ const NounsList = () => {
 
   return (
     <FlatList
-      data={nounsState.nouns}
+      data={nounsState.nouns.sort((a, b) => a.name.localeCompare(b.name))}
       renderItem={({ item }) => (
         <Item
           id={item.id}

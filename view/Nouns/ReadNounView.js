@@ -1,6 +1,7 @@
 import { View, Text, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import { useNounsContext } from '../../controller/NounsController';
 import styles from '../assets/UpfrontStyles';
+import IconButton from '../components/IconButton';
 
 const ReadNounView = () => {
     const { nounsState, dispatch } = useNounsContext();
@@ -18,7 +19,7 @@ const ReadNounView = () => {
             </View>
 
             <View style={styles.row}>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     style={styles.button}
                     onPress={() => dispatch({ type: 'NAVIGATEUPDATENOUN', id: nounsState.noun.id })}
                 >
@@ -29,10 +30,16 @@ const ReadNounView = () => {
                     onPress={() => dispatch({ type: 'DELETENOUN', id: nounsState.noun.id })}
                 >
                     <Text style={styles.buttonText}>Delete</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+                <IconButton
+                    iconName={'pencil'}
+                    onPress={() => dispatch({ type: 'NAVIGATEUPDATENOUN', id: nounsState.noun.id })}
+                />
+                <IconButton
+                    iconName={'trash'}
+                    onPress={() => dispatch({ type: 'DELETENOUN', id: nounsState.noun.id })}
+                />
             </View>
-
-
         </View >
     );
 };

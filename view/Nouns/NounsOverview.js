@@ -11,23 +11,12 @@ import {
 import styles from '../assets/UpfrontStyles'; // Import the styles module
 import { useNounsContext } from '../../controller/NounsController';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
-
 const NounsOverview = () => {
   const { dispatch } = useNounsContext();
 
   const handleNavigatie = (action, payload) => {
     // dispatch een actie en indien nodig een payload
     dispatch({ type: action, id: payload });
-  };
-
-  const IconButton = ({ text, iconName, onPress }) => {
-    return (
-      <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Icon name={iconName} size={20} color="white" style={styles.icon} />
-        <Text style={styles.buttonText}>{text}</Text>
-      </TouchableOpacity>
-    );
   };
 
   return (

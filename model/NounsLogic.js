@@ -35,18 +35,7 @@ const NounsLogic = (nounsState) => {
   };
 
   const listNouns = (data) => {
-    data.sort(function (a, b) {
-      // a < b return true als a voor b komt in lexicografische volgorde.
-      // a > b return true als a na b komt in lexicografische volgorde.
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      // namen zijn gelijk
-      return 0;
-    });
+
     return data;
   };
 
