@@ -32,8 +32,8 @@ export const NounsController = ({ children }) => {
     // console.log('collectUpdateNoun', result);
     return result;
   };
-  const collectDeleteNoun = (id) => {
-    const result = deleteNoun(id);
+  const collectDeleteNoun = (data, id) => {
+    const result = deleteNoun(data, id);
     // console.log('collectDeleteNoun', result);
     return result;
   };
@@ -109,13 +109,14 @@ export const NounsController = ({ children }) => {
       case 'DELETENOUN':
         // console.log('DELETENOUNtriggered', action);
 
-        deleete = collectDeleteNoun(action.id);
+        deleete = collectDeleteNoun(nounsState.nouns, action.id);
+        console.log('Nouns', deleete);
 
-        navigation.navigate('DeleteNounView');
+        navigation.navigate('ListNounsView');
         return {
           ...nounsState,
-          currentScreen: 'DeleteNounView',
-          noun: deleete,
+          currentScreen: 'ListNounsView',
+          nouns: deleete,
         };
       case 'LISTNOUNS':
         // console.log('LISTNOUNStriggered', action);

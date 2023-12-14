@@ -28,8 +28,10 @@ const NounsLogic = (nounsState) => {
     return updatedNouns;
   };
 
-  const deleteNoun = (id) => {
-    return ['delete', 'Noun id = ', id];
+  const deleteNoun = (data, id) => {
+    const updatedNouns = data.filter((obj) => obj.id !== id);
+
+    return updatedNouns;
   };
 
   const listNouns = (data) => {

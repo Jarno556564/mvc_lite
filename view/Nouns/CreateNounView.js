@@ -11,6 +11,20 @@ const CreateNounView = () => {
     const [bornAt, setBornAt] = useState('');
     const { nounsState, dispatch } = useNounsContext();
 
+    useEffect(() => {
+        // Toestemming vragen indien nodig voor toegang tot de image gallery van het apparaat
+        (async () => {
+            const { status } =
+                await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== 'granted') {
+                Alert.alert(
+                    'Permission required',
+                    'Please grant permission to access the image gallery.'
+                );
+            }
+        })();
+    }, []);
+
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
